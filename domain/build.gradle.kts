@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id(Plugins.kotlinKapt)
+    id(Plugins.hilt)
 }
 
 android {
@@ -17,10 +19,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -33,6 +32,12 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
+    implementation(project(":common"))
+    implementation(project(":entities"))
+
+    implementation(Libs.Hilt.hilt)
+    kapt(Libs.Hilt.hiltKapt)
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

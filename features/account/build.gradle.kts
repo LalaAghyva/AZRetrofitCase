@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id(Plugins.kotlinKapt)
+    id(Plugins.hilt)
 }
 
 android {
@@ -17,10 +19,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -33,6 +32,14 @@ android {
 }
 
 dependencies {
+
+    implementation(Libs.Hilt.hilt)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    kapt(Libs.Hilt.hiltKapt)
+
+    implementation(Libs.Navigation.navigationUi)
+    implementation(Libs.Navigation.navigationFragment)
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

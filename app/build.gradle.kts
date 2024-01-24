@@ -1,6 +1,10 @@
+import org.gradle.kotlin.dsl.execution.Program
+
 plugins {
     id(Plugins.androidApplication)
-    id(Plugins.jetbrainsKotlin)
+    id(Plugins.jetBrainsKotlin)
+    id(Plugins.kotlinKapt)
+    id(Plugins.hilt)
 }
 
 android {
@@ -20,10 +24,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -36,7 +37,16 @@ android {
 }
 
 dependencies {
+    implementation(project(":features:account"))
+    implementation(project(":features:flights"))
+
     implementation(Libs.UI.material)
+    implementation(Libs.Hilt.hilt)
+    kapt(Libs.Hilt.hiltKapt)
+
+    implementation(Libs.Navigation.navigationUi)
+    implementation(Libs.Navigation.navigationFragment)
+
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
