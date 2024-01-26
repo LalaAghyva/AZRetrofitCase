@@ -1,7 +1,6 @@
 package com.sirketismi.domain.usecases
 
-import com.sirketismi.common.Resource
-import com.sirketismi.data.repository.FlightRepository
+import com.sirketismi.common.flowstate.Resource
 import com.sirketismi.data.repository.FlightRepositoryInterface
 import com.sirketismi.domain.mapper.SearchResponseToUIStateMapper
 import kotlinx.coroutines.flow.catch
