@@ -39,6 +39,8 @@ android {
 dependencies {
     implementation(project(":features:account"))
     implementation(project(":features:flights"))
+    implementation(project(":features:searchlistdetail"))
+
 
     implementation(Libs.UI.material)
     implementation(Libs.Hilt.hilt)

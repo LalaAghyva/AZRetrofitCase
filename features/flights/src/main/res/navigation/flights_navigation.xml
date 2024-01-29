@@ -7,5 +7,7 @@
     <fragment
         android:id="@+id/searchListFragment"
         android:name="com.sirketismi.flights.searchlist.SearchListFragment"
-        android:label="SearchListFragment" />
+        android:label="SearchListFragment" >
+
+    </fragment>
 </navigation>

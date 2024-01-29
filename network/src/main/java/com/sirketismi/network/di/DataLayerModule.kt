@@ -3,6 +3,7 @@ package com.sirketismi.network.di
 import com.google.gson.Gson
 import com.sirketismi.network.ApiService
 import com.sirketismi.network.CompaignService
+import com.sirketismi.network.interceptor.TokenInjector
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +46,7 @@ object DataLayerModule {
     @Provides
     @Singleton
     @FlightAnnotation
-    fun provideOkHttpsClient(): OkHttpClient {
+    fun provideOkHttpsClient(tokenInjector: TokenInjector): OkHttpClient {
         val client = OkHttpClient.Builder()
 
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -56,6 +57,7 @@ object DataLayerModule {
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(tokenInjector)
 
         return client.build()
     }

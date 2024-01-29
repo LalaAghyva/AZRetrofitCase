@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sirketismi.entities.uimodel.FlightListUIModel
 import com.sirketismi.flights.databinding.ListItemFlightBinding
 
-class SearchListAdapter : RecyclerView.Adapter<SearchListViewHolder>() {
+class SearchListAdapter(val onClickItem : (FlightListUIModel)->Unit) : RecyclerView.Adapter<SearchListViewHolder>() {
 
     private val differ = AsyncListDiffer(this, diffCallBack)
 
@@ -24,7 +24,7 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListViewHolder>() {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ListItemFlightBinding.inflate(inflater, parent, false)
 
-        return SearchListViewHolder(binding)
+        return SearchListViewHolder(binding, onClickItem)
     }
 
     override fun onBindViewHolder(holder: SearchListViewHolder, position: Int) {
@@ -52,8 +52,11 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListViewHolder>() {
 
 }
 
-class SearchListViewHolder(private val binding : ListItemFlightBinding) : RecyclerView.ViewHolder(binding.root) {
+class SearchListViewHolder(private val binding : ListItemFlightBinding, val onClickItem : (FlightListUIModel)->Unit) : RecyclerView.ViewHolder(binding.root) {
     fun bind(viewModel : FlightListUIModel) {
         binding.txt.text = viewModel.airlineName
+        binding.root.setOnClickListener {
+            onClickItem(viewModel)
+        }
     }
 }
